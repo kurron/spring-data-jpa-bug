@@ -10,7 +10,6 @@ repositories {
 
 configurations.all {
     exclude group: 'commons-logging'
-    exclude module: 'junit-dep'
 }
 
 dependencies {
@@ -29,7 +28,6 @@ dependencies {
     testCompile "org.springframework:spring-test:${springFrameworkVersion}"
     testCompile( "org.spockframework:spock-spring:${spockVersion}" ) {
         exclude module: 'groovy-all'
-        exclude module: 'junit-dep'
     }
 }
 
