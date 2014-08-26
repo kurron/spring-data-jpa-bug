@@ -50,6 +50,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: spock-core-0.7-groovy-2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit-dep-4.10" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: hsqldb-2.3.2" level="project" />
   </component>
 </module>
 

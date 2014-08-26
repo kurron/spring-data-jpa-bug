@@ -1,5 +1,6 @@
 package org.example
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
@@ -9,10 +10,13 @@ import spock.lang.Specification
 @ContextConfiguration( classes = TestConfiguration )
 class SpringDataJpaComponentTest extends Specification {
 
+    @Autowired
+    JpaParentRepository repository
+
     def 'show case the failure'() {
 
-        given:
-        int a = 0
+        given: 'valid repository'
+        assert repository
 
         when:
         int b = 0
