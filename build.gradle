@@ -1,0 +1,45 @@
+apply plugin: 'groovy'
+apply plugin: 'project-report'
+
+group = 'org.example'
+version = '0.0.0'
+
+repositories {
+    jcenter()
+}
+
+configurations.all {
+    exclude group: 'commons-logging'
+    exclude module: 'junit-dep'
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}:indy"
+    testCompile( "org.spockframework:spock-spring:${spockVersion}" ) {
+        exclude module: 'groovy-all'
+        exclude module: 'junit-dep'
+    }
+}
+
+defaultTasks << 'clean'
+defaultTasks << 'projectReport'
+defaultTasks << 'build'
+
+compileGroovy.groovyOptions.optimizationOptions['indy'] = true
+compileTestGroovy.groovyOptions.optimizationOptions['indy'] = true
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+compileGroovy.options*.compilerArgs = ['-Xlint:deprecation','-encoding', 'UTF-8']
+compileTestGroovy.options*.compilerArgs = ['-Xlint:deprecation','-encoding', 'UTF-8']
+
+test {
+    scanForTestClasses = true
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    testLogging {
+        showStandardStreams = false
+        exceptionFormat = 'full'
+        events( 'started', 'passed', 'skipped', 'failed' )
+    }
+}
