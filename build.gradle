@@ -14,7 +14,19 @@ configurations.all {
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:${groovyVersion}:indy"
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    compile "org.springframework.data:spring-data-jpa:${springDataJpaVersion}"
+    compile "org.springframework:spring-core:${springFrameworkVersion}"
+    compile "org.springframework:spring-beans:${springFrameworkVersion}"
+    compile "org.springframework:spring-orm:${springFrameworkVersion}"
+    compile "org.springframework:spring-context:${springFrameworkVersion}"
+    compile "org.springframework:spring-aop:${springFrameworkVersion}"
+    compile "org.springframework:spring-tx:${springFrameworkVersion}"
+    compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
+
+    runtime "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testCompile "org.springframework:spring-test:${springFrameworkVersion}"
     testCompile( "org.spockframework:spock-spring:${spockVersion}" ) {
         exclude module: 'groovy-all'
         exclude module: 'junit-dep'
@@ -25,8 +37,8 @@ defaultTasks << 'clean'
 defaultTasks << 'projectReport'
 defaultTasks << 'build'
 
-compileGroovy.groovyOptions.optimizationOptions['indy'] = true
-compileTestGroovy.groovyOptions.optimizationOptions['indy'] = true
+compileGroovy.groovyOptions.optimizationOptions['indy'] = false
+compileTestGroovy.groovyOptions.optimizationOptions['indy'] = false
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
