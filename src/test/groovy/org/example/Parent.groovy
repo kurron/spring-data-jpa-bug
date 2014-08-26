@@ -25,20 +25,26 @@ class Parent {
     @Id
     @GeneratedValue( strategy= GenerationType.AUTO )
     @Column( name='id' )
-    private Long id;
+    Long id;
 
     /**
      * Version number used for optimistic concurrency management.
      */
     @Version
     @Column( name = 'version', nullable = false )
-    private Integer version;
+    Integer version;
+
+    /**
+     * The name of the parent.
+     */
+    @Column( name = 'name' )
+    String name;
 
     /**
      * The associated child entity.
      */
     @OneToOne( orphanRemoval = true )
     @Cascade( [CascadeType.ALL] )
-    private Child child;
+    Child child;
 
 }

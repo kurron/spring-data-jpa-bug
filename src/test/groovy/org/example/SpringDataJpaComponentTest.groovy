@@ -18,10 +18,20 @@ class SpringDataJpaComponentTest extends Specification {
         given: 'valid repository'
         assert repository
 
-        when:
-        int b = 0
+        and: 'a saved parent with a child'
+        def originalChild = new Child( name: 'original' )
+        def originalParent = new Parent( name: 'original', child: originalChild )
+        def savedOriginalParent = repository.saveAndFlush( originalParent )
 
-        then:
-        false
+        when: 'we replace the original child with another one'
+        def loadedParent = repository.findOne( savedOriginalParent.id )
+        def newChild = new Child( name: 'replacement', id: originalChild.id, version: originalChild.version )
+        loadedParent.child = newChild
+        repository.saveAndFlush( loadedParent )
+
+        then: 'the updated parent contains the new child'
+        def updatedParent = repository.findOne( loadedParent.id )
+        updatedParent.child.name == newChild.name
+
     }
 }

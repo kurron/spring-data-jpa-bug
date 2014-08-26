@@ -21,19 +21,19 @@ class Child {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     @Column( name = 'id', nullable = false )
-    private Long theId;
+    Long id;
 
     /**
      * Version number used for optimistic concurrency management.
      */
     @Version
     @Column( name = 'version', nullable = false )
-    private Integer theVersion;
+    Integer version;
 
     /**
      * The name of the child.
      */
     @Column( name = 'name' )
-    private String theName;
+    String name;
 
 }
